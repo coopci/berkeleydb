@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Chapter 9.  Upgrading Berkeley DB 12.1.6.2 applications to Berkeley DB 18.1</title>
+    <link rel="stylesheet" href="gettingStarted.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="start" href="index.html" title="Berkeley DB Installation and Build Guide" />
+    <link rel="up" href="index.html" title="Berkeley DB Installation and Build Guide" />
+    <link rel="prev" href="build_nodejs.html" title="Building Node.js" />
+    <link rel="next" href="license_change.html" title="License Change" />
+  </head>
+  <body>
+    <div xmlns="" class="navheader">
+      <div class="libver">
+        <p>Library Version 18.1.32</p>
+      </div>
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Chapter 9.  Upgrading Berkeley DB 12.1.6.2 applications to 
+Berkeley DB 18.1 </th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="build_nodejs.html">Prev</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> <a accesskey="n" href="license_change.html">Next</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="upgrade_181_toc"></a>Chapter 9.  Upgrading Berkeley DB 12.1.6.2 applications to 
+Berkeley DB 18.1 </h2>
+          </div>
+        </div>
+      </div>
+      <div class="toc">
+        <p>
+          <b>Table of Contents</b>
+        </p>
+        <dl>
+          <dt>
+            <span class="sect1">
+              <a href="upgrade_181_toc.html#upgrade_181_intro">Introduction</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="license_change.html">License Change
+        </a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="ssl_rep_manager.html">Secure Sockets Layer (SSL) Support for the Replication 
+        Manager</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="ssl_rep_manager.html#idm140089946030480">New Function</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="ssl_rep_manager.html#idm140089946168736">New Flags</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="mvcc_rep_clients.html">Multiversion Concurrency Control (MVCC) 
+        for Replication Clients</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="new_rep_objects.html">New Replication Environment Region Objects</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="new_rep_objects.html#idm140089946032192">New Parameters</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="new_flags.html">New Replication Manager Flags</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="new_flags.html#idm140089946001424">New Parameter Values</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="new_information.html">New Information Available to Replicated Applications</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="new_information.html#idm140089946059600">New Error</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="new_information.html#idm140089945999904">New Replication Manager Event</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="new_information.html#idm140089945992944">New Replication Manager Statistic</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="new_information.html#idm140089945990864">New Replication Manager Site Field</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="new_information.html#idm140089945988784">New Replication Manager Site Flag</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="new_utility.html">New Utility <code class="literal">db_convert</code></a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="ddl_api.html">New Direct Persistence Layer (DPL) API</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="new_command.html">New Utility Command Line Option</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="sql_api_change.html">SQL API Changes</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="sql_api_change.html#idm140089946039376">SQL User Authentication</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="sql_api_change.html#idm140089945971040">New PRAGMAs</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="sql_api_change.html#idm140089945985968">Internal Berkeley DB Messages</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="sql_api_change.html#idm140089945996256">Updated SQL Version</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+          <dt>
+            <span class="sect1">
+              <a href="visual_studio.html">Changed Visual Studio Support</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="bdb_support.html">Added VxWorks Support</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="php_support.html">Added PHP 7 Support</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="recog_mess_num.html">Error Message Numbers</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="remove_utility.html">Removed Utility <code class="literal">db_sql_codegen</code></a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="remove_support.html">Removed QNX Support</a>
+            </span>
+          </dt>
+          <dt>
+            <span class="sect1">
+              <a href="changelog_18_1.html">Berkeley DB Library Version 18.1.32 Change Log</a>
+            </span>
+          </dt>
+          <dd>
+            <dl>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945952032">Changes between version 18.1.25 and version 18.1.32</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945950304">Database or Log File On-Disk Format Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089946008064">New Features/Improvements</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945948320">Database Environment Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945982240">Concurrent Data Store Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945950176">Access Method Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945947504">API Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945920800">SQL-specific API Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945919360">Tcl-specific API Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945917200">Java-specific API Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945921296">C#-specific API Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945910112">Replication Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945908672">Locking Subsystem Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945905072">Logging Subsystem Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945944368">Memory Pool Subsystem Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945979488">Mutex Subsystem Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945905392">Transaction Subsystem Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945896784">Test Suite Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945895040">Utility Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945892368">Configuration, Documentation, Sample Apps, Portability and Build Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945889600">Example Changes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945888160">Miscellaneous Bug Fixes</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945935728">Deprecated Features</a>
+                </span>
+              </dt>
+              <dt>
+                <span class="sect2">
+                  <a href="changelog_18_1.html#idm140089945873488">Known Bugs</a>
+                </span>
+              </dt>
+            </dl>
+          </dd>
+        </dl>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="upgrade_181_intro"></a>Introduction</h2>
+            </div>
+          </div>
+        </div>
+        <p> 
+            The following pages describe how to upgrade
+            applications coded against the Berkeley DB 12.1.6.2
+            library (which belongs to Berkeley DB
+            12<span class="emphasis"><em>c</em></span> Release 1) to the Berkeley DB
+            18.1 library (which belongs to Berkeley DB
+            18 Release 1). This information
+            does not describe how to upgrade Berkeley DB 1.85 release
+            applications. 
+        </p>
+        <p> 
+            For information on the general process of upgrading
+            Berkeley DB installations and upgrade instructions related
+            to historical releases, see the 
+            <a class="ulink" href="http://docs.oracle.com/cd/E17076_05/html/upgrading/index.html" target="_top">
+             Berkeley DB Upgrade Guide. </a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="build_nodejs.html">Prev</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> <a accesskey="n" href="license_change.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Building Node.js </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> License Change
+        </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
