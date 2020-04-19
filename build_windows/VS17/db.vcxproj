@@ -176,6 +176,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>_UNICODE;UNICODE;CONFIG_TEST;DB_CREATE_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalOptions>/FIXED:NO /export:__db_assert %(AdditionalOptions)</AdditionalOptions>
